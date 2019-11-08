@@ -20,6 +20,5 @@ class TestForms(TestCase):
         form = forms.ContactForm({
             'message': 'Que la force soit avec toi'
         })
-
         self.assertFalse(form.is_valid())
         
