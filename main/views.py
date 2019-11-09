@@ -10,5 +10,3 @@ class ContactUsView(FormView):
     def form_valid(self, form) :
         form.send_mail()
         return super().form_valid(form)
-
-# Create your views here.

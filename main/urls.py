@@ -5,7 +5,7 @@ from main import views
 
 urlpatterns = [
     path('contact-us',
-    views.ContactUsView.as_view,
+    views.ContactUsView.as_view(template_name="contact_form.html"),
     name="contact_us"),
     path(
         "about-us/",
