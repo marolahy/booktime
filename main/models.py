@@ -17,3 +17,11 @@ class ProductImage(models.Model):
         Product, on_delete=models.CASCADE
     )
     image = models.ImageField(upload_to="product-images")
+
+
+class ProductTag(models.Model):
+    product = models.ManyToManyField(Product, blank=True)
+    name = models.CharField(max_length=32)
+    slug = models.SlugField(max_length=48)
+    description = models.TextField(blank=True)
+    active  = models.BooleanField(default=True)
