@@ -7,29 +7,28 @@ from django.dispatch import receiver
 from .models import ProductImage
 
 THUMBNAIL_SIZE = (300, 300)
+
 logger = logging.getLogger(__name__)
 
 
-@receiver(pre_save,sender=ProductImage)
-def generate_thumbnail(sender, instance, **kwarg):
+@receiver(pre_save, sender=ProductImage)
+def generate_thumbnail(sender, instance, **kwargs):
     logger.info(
-        "Generating thumnail for product ID %d",
-        instance.product.id
+        "Generating thumbnail for product %d",
+        instance.product.id,
     )
     image = Image.open(instance.image)
     image = image.convert("RGB")
-    image.thumbnail( THUMBNAIL_SIZE, Image.ANTIALIAS)
+    image.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
 
     temp_thumb = BytesIO()
     image.save(temp_thumb, "JPEG")
     temp_thumb.seek(0)
 
-    # set save=False, sinon boucle infinie il rappel le signal
-
+    # set save=False, otherwise it will run in an infinite loop
     instance.thumbnail.save(
         instance.image.name,
         ContentFile(temp_thumb.read()),
-        save=False
+        save=False,
     )
-
     temp_thumb.close()
