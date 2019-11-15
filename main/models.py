@@ -4,6 +4,10 @@ from django.db import models
 class ActiveManager(models.Manager):
     def active(self):
         return self.filter(active=True)
+
+class ProductTagManager(self):
+    def get_by_natural_key(self, slug):
+        return self.get(slug=slug)
         
 class Product(models.Model):
     name = models.CharField(max_length=32)
@@ -39,6 +43,14 @@ class ProductTag(models.Model):
     slug = models.SlugField(max_length=48)
     description = models.TextField(blank=True)
     active  = models.BooleanField(default=True)
+    objects = ProductTagManager()
+
+    def __str__(self):
+        return self.name
+
+    def natural_key(self):
+        return (self.slug,)
+    
 
 
 
