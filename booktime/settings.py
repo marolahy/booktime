@@ -155,3 +155,6 @@ LOGGING = {
 }
 
 AUTH_USER_MODEL = "main.User"
+
+
+LOGIN_REDIRECT_URL = "/"

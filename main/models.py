@@ -90,6 +90,9 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = UserManager()
+
+class Lead(models.Model):
+    name = models.CharField(max_length=32)
         
 
     
