@@ -3,6 +3,7 @@ from django.urls import reverse
 from main import forms,models
 from decimal import Decimal
 
+
 # Create your tests here.
 
 class TestPage(TestCase):
@@ -80,6 +81,16 @@ class TestPage(TestCase):
         self.assertEquals(
             list(response.context["object_list"]),
             list(product_list),
+        )
+    
+    def test_user_signup_page_loads_correctly( self ):
+        response = self.client.get( reverse("signup") )
+        self.assertEqual( response.status_code, 200 )
+        self.assertTemplateUsed( response, "signup.html")
+        self.assertContains( response, "BookTime" )
+        self.assertIsInstance(
+            response.context["form"],
+            forms.UserCreationForm
         )
 
         
