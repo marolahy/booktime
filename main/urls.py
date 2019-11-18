@@ -6,9 +6,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path("products/<slug:tag>/",
+        views.ProductListView.as_view(),
+        name="products"
+    ),
     path('contact-us',
-    views.ContactUsView.as_view(template_name="contact_form.html"),
-    name="contact_us"),
+        views.ContactUsView.as_view(template_name="contact_form.html"),
+        name="contact_us"),
     path(
         "about-us/",
         TemplateView.as_view(template_name="about_us.html"),

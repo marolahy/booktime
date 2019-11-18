@@ -17,6 +17,7 @@ class Product(models.Model):
     active = models.BooleanField(default=True)
     in_stock = models.BooleanField(default=True)
     date_updated = models.DateTimeField(auto_now=True)
+    tags = models.ManyToManyField('ProductTag', blank=True)
 
     def __str__(self):
         return self.name
@@ -38,7 +39,6 @@ class ProductImage(models.Model):
 
 
 class ProductTag(models.Model):
-    product = models.ManyToManyField(Product, blank=True)
     name = models.CharField(max_length=32)
     slug = models.SlugField(max_length=48)
     description = models.TextField(blank=True)
