@@ -170,7 +170,7 @@ class TestPage(TestCase):
 
         w  = models.Product.objects.create(
             name="Microsoft Windows",
-            slug="cathedral-bazaar",
+            slug="microsoft-windows",
             price=Decimal("12.0")
         )
         self.client.force_login( user1 )

@@ -7,6 +7,7 @@ from django.contrib.auth.forms import (
 )
 from django.contrib.auth import authenticate
 from . import models
+from django.forms import inlineformset_factory
 logger = logging.getLogger(__name__)
 class ContactForm(forms.Form):
     name = forms.CharField(label="Your name",max_length=100)
@@ -82,3 +83,10 @@ class AuthenticationForm(forms.Form):
     
     def get_user(self):
         return self.user
+
+BasketLineFormSet = inlineformset_factory(
+    models.Basket,
+    models.BasketLine,
+    fields=("quantity",),
+    extra=0,
+)
