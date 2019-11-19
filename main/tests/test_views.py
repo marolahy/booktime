@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from main import forms,models
 from decimal import Decimal
+from django.contrib import auth
 
 
 # Create your tests here.
@@ -161,7 +162,6 @@ class TestPage(TestCase):
             "user1",
             "pw432joij"
         )
-
         cb = models.Product.objects.create(
             name="cathedral and bazaar",
             slug="cathedral-bazaar",
@@ -214,4 +214,44 @@ class TestPage(TestCase):
             ).count(),
             2
         )
-        
+    
+    def test_add_to_basket_login_merge_works( self ):
+        user1 = models.User.objects.create_user(
+            "user1@test.com",
+            "pw432joij"
+        )
+
+        cb = models.Product.objects.create(
+            name="Microsoft Windows",
+            slug="microsoft-windows",
+            price=Decimal("12.0")
+        )
+        w  = models.Product.objects.create(
+            name="Microsoft Windows",
+            slug="microsoft-windows",
+            price=Decimal("12.0")
+        )
+        basket = models.Basket.objects.create(user=user1)
+        models.BasketLine.objects.create(
+            basket=basket,
+            product=cb,
+            quantity=2
+        )
+        response = self.client.get(
+            reverse("add_to_basket"),
+            { "product_id": w.id }
+        )
+        response = self.client.post(
+            reverse("login"),
+            {
+                "email":"user1@test.com",
+                "password": "pw432joij",
+            },
+        )
+        self.assertTrue(
+            auth.get_user( self.client ).is_authenticated
+        )
+        self.assertTrue(
+            models.Basket.objects.get(user=user1)
+        )
+        self.assertEquals(basket.count(),3)

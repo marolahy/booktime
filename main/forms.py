@@ -68,9 +68,10 @@ class AuthenticationForm(forms.Form):
         if email is not None and password :
             self.user = authenticate(
                 self.request,
-                email=email,
+                username=email,
                 password=password
             )
+            logger.error(repr(self.user))
             if self.user is None :
                 raise forms.ValidationError(
                     "Inalid email/password combination."
