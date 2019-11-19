@@ -155,3 +155,63 @@ class TestPage(TestCase):
         self.assertTrue(
             models.Address.objects.filter(user=user1).exists()
         )
+
+    def test_add_to_basket_loggin_work( self ):
+        user1 = models.User.objects.create_user(
+            "user1",
+            "pw432joij"
+        )
+
+        cb = models.Product.objects.create(
+            name="cathedral and bazaar",
+            slug="cathedral-bazaar",
+            price=Decimal("10.0")
+        )
+
+        w  = models.Product.objects.create(
+            name="Microsoft Windows",
+            slug="cathedral-bazaar",
+            price=Decimal("12.0")
+        )
+        self.client.force_login( user1 )
+        response = self.client.get(
+            reverse("add_to_basket"),
+            {
+                "product_id": cb.id 
+            }
+        )
+        response = self.client.get(
+            reverse(
+                "add_to_basket"
+            ),
+            {
+                "product_id": cb.id 
+            }
+        )
+
+        self.assertTrue(
+            models.Basket.objects.filter(user=user1).exists()
+        )
+
+        self.assertEquals(
+            models.BasketLine.objects.filter(
+                basket__user=user1
+            ).count(),
+            1
+        )
+        response = self.client.get(
+            reverse(
+                "add_to_basket"
+            ),
+            {
+                "product_id": w.id 
+            }
+        )
+
+        self.assertEquals(
+            models.BasketLine.objects.filter(
+                basket__user=user1
+            ).count(),
+            2
+        )
+        

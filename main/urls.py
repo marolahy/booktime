@@ -62,4 +62,9 @@ urlpatterns = [
         name="address_delete",
 
     ),
+    path(
+        'add_to_basket/',
+        views.add_to_basket,
+        name='add_to_basket'
+    )
 ] + static( settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )
