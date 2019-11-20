@@ -20,3 +20,9 @@
     {% endif %}
 
 {% endblock content %}
+
+{% block js %}
+    {% if formset %}
+        {{ formset.media }}
+    {% endif %}
+{% endblock js %}
