@@ -7,6 +7,8 @@ from django.contrib.auth.forms import (
 )
 from django.contrib.auth import authenticate
 from . import models
+from django.forms import inlineformset_factory
+from . import widgets
 logger = logging.getLogger(__name__)
 class ContactForm(forms.Form):
     name = forms.CharField(label="Your name",max_length=100)
@@ -67,9 +69,10 @@ class AuthenticationForm(forms.Form):
         if email is not None and password :
             self.user = authenticate(
                 self.request,
-                email=email,
+                username=email,
                 password=password
             )
+            logger.error(repr(self.user))
             if self.user is None :
                 raise forms.ValidationError(
                     "Inalid email/password combination."
@@ -82,3 +85,28 @@ class AuthenticationForm(forms.Form):
     
     def get_user(self):
         return self.user
+
+BasketLineFormSet = inlineformset_factory(
+    models.Basket,
+    models.BasketLine,
+    fields=("quantity",),
+    extra=0,
+    widgets={"quantity":widgets.PlusMinusNumberInput()}
+)
+
+class AdressSelectionForm( forms.Form ):
+    billing_address = forms.ModelChoiceField(
+        queryset=None
+    )
+
+    shipping_address = forms.ModelChoiceField(
+        queryset=None
+    )
+
+    def __init__( self, user, *args, **kwargs ):
+        super().__init__( *args, **kwargs )
+        queryset = models.Address.objects.filter( user=user )
+        self.fields['billing_address'].queryset = queryset
+        self.fields['shipping_address'].queryset = queryset
+
+        

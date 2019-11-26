@@ -62,4 +62,25 @@ urlpatterns = [
         name="address_delete",
 
     ),
+    path(
+        'add_to_basket/',
+        views.add_to_basket,
+        name='add_to_basket'
+    ),
+    path(
+        'basket/',
+        views.manage_basket,
+        name='basket'
+    ),
+        path('order/done',
+        TemplateView.as_view( template_name='order_done.html' ),
+        name="checkout_done",
+    
+    ),
+    path(
+        "order/address_select/",
+        views.AddressSelectionView.as_view(),
+        name="address_select",
+    )
+    
 ] + static( settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )
