@@ -3,7 +3,7 @@ const BundleTracker = require( 'webpack-bundle-tracker' )
 module.exports = {
     mode: 'development',
     entry: {
-        imageswitcher: './frontennd/imageswitcher.js'
+        imageswitcher: './frontend/imageswitcher.js'
     },
     plugins: [
         new BundleTracker({
@@ -12,7 +12,7 @@ module.exports = {
     ],
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(dirname, 'main/static/bundles')
+        path: path.resolve(__dirname, 'main/static/bundles')
 
     }
 } ;
