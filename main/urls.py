@@ -9,6 +9,7 @@ from main import models, forms
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    
     path("products/<slug:tag>/",
         views.ProductListView.as_view(),
         name="products"

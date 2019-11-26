@@ -1,1 +1,3 @@
 MEDIA/*
+.vscode/
+node_modules/
