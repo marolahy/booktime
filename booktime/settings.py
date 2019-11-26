@@ -159,3 +159,4 @@ AUTH_USER_MODEL = "main.User"
 
 
 LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "/login/"

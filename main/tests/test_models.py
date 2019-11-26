@@ -17,7 +17,6 @@ class TestModel(TestCase):
             price=Decimal("2.00"),
             active=False
         )
-        
         self.assertEquals(2,len(models.Product.objects.active()))
 
     def test_create_order_works(self):
@@ -33,6 +32,7 @@ class TestModel(TestCase):
             "user1",
             "pw432joij"
         )
+
         billing = models.Address.objects.create(
             user=user1,
             name="john kimball",
