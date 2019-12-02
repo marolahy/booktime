@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/marolahy/booktime#readme",
   "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "jest": "^24.9.0",
     "webpack": "^4.41.2",
     "webpack-bundle-tracker": "^0.4.3",
     "webpack-cli": "^3.3.10"
