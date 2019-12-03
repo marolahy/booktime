@@ -20,7 +20,7 @@ class ImageBox extends React.Component {
         })
     }
     render(){
-        const images = this.props.image((i) => 
+        const images = this.props.images.map((i) => 
             e('div',{ 
                 style: imageStyle,
                 className: "image",

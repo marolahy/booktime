@@ -17,7 +17,7 @@ class FrontendTests( StaticLiveServerTestCase ):
     def setUpClass(cls):
         super(FrontendTests,cls).setUpClass()
         cls.selenium = WebDriver(executable_path="C:\selenium\geckodriver")
-        cls.selenium.implicitly_wait(time_to_wait=10)
+        cls.selenium.implicitly_wait(10)
 
     @classmethod
     def tearDownClass(cls):
