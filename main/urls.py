@@ -9,13 +9,15 @@ from main import models, forms
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    
     path("products/<slug:tag>/",
         views.ProductListView.as_view(),
         name="products"
     ),
-    path("product/<int:pk>/",
+    path(
+        "product/<slug:slug>/",
         DetailView.as_view(model=models.Product),
-        name="product"
+        name="product",
     ),
     path('contact-us',
         views.ContactUsView.as_view(template_name="contact_form.html"),

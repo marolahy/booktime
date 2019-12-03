@@ -1,0 +1,40 @@
+{
+  "name": "booktime",
+  "version": "1.0.0",
+  "description": "Django 2 project et exemple d'utilisation de channel",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack"
+  },
+  "jest":{
+    "moduleDirectories":[
+      "node_modules",
+      "frontend"
+    ],
+    "testURL": "http://localhost"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marolahy/booktime.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marolahy/booktime/issues"
+  },
+  "homepage": "https://github.com/marolahy/booktime#readme",
+  "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "jest": "^24.9.0",
+    "webpack": "^4.41.2",
+    "webpack-bundle-tracker": "^0.4.3",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}
