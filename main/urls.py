@@ -7,6 +7,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from main import models, forms
 from django.contrib.auth import views as auth_views
+from rest_framework import routers
+
+
+from main import endpoints
+
+
+router = routers.DefaultRouter()
+router.register(r'orderlines',endpoints.PaidOrderLineViewSet)
+router.register(r'orders',endpoints.PaidOrderViewSet)
 
 
 urlpatterns = [
@@ -88,6 +97,9 @@ urlpatterns = [
     path(
         'api-auth/',
         include('rest_framework.urls')
+    ),
+    path('api/',
+    include(router.urls)
     ),
     path(
         "order/address_select/",
