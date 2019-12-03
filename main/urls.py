@@ -86,6 +86,10 @@ urlpatterns = [
     
     ),
     path(
+        'api-auth/',
+        include('rest_framework.urls')
+    ),
+    path(
         "order/address_select/",
         views.AddressSelectionView.as_view(),
         name="address_select",
