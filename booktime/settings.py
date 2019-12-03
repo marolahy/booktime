@@ -37,8 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "main.apps.MainConfig",
+    'django_extensions',
+    'debug_toolbar',
     'webpack_loader',
+    'django_tables2',
+    'widget_tweaks',
+    "main.apps.MainConfig",
+
 ]
 
 MIDDLEWARE = [
@@ -47,10 +52,16 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'main.middlewares.basket_middleware',
+    
 ]
+
+INTERNAL_IPS = ['127.0.0.1']
+
+DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap.html'
 
 ROOT_URLCONF = 'booktime.urls'
 

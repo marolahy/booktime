@@ -11,9 +11,9 @@
         <tr>
             <th>Cover images</th>
             <td> 
-                {% for image in object.productimage_set.all %}
-                    <img src="{{ image.thumbnail.url }}" alt="cover" />
-                {% endfor %}
+               <div id="imagebox">
+                    Loading...
+                </div>
             </td>
         </tr>
         <tr>
@@ -43,7 +43,7 @@
 {% block js %}
     {% render_bundle 'imageswitcher' 'js' %}
     <script>
-        document.addEventListner("DOMContentLoaded", function(event){
+        document.addEventListener("DOMContentLoaded", function(event){
             var images = [
                 {% for image in object.productimage_set.all %}
                     {
@@ -55,7 +55,9 @@
             ReactDOM.render(React.createElement(ImageBox,{
                 images: images,
                 imageStart: images[0]
-            }), document.getElementById('imagebox'))
+            }), document.getElementById('imagebox'));
+
+          console.log("executer")
         })
 
     </script>
